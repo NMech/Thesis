@@ -86,7 +86,7 @@ def get_action(o, ac, deterministic=False):
     #return ac.act(torch.as_tensor(o, dtype=torch.float32), 
     #             deterministic)
     action = ac.act(torch.as_tensor(o, dtype=torch.float32), deterministic)
-    print("Actionnnnnnnnnnnnn:", action)  # Print the action before returning    #NIKOS
+   # print("Actionnnnnnnnnnnnn:", action)  # Print the action before returning    #NIKOS
     return action
 
 def test_agent(ac, test_env, num_test_episodes, max_ep_len, logger):

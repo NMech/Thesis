@@ -1,10 +1,20 @@
 import numpy as np
-import spinup.algos.pytorch.sac.core as core
+import spinup.algos.pytorch.explainableSac.core as core
 import torch
 
 class ReplayBuffer:
     """
     A simple FIFO experience replay buffer for SAC agents.
+
+    Attributes:
+    obs_buf (numpy.ndarray):  Buffer to store observations.
+    obs2_buf (numpy.ndarray): Buffer to store next observations.
+    act_buf (numpy.ndarray):  Buffer to store actions.
+    rew_buf (numpy.ndarray):  Buffer to store rewards.
+    done_buf (numpy.ndarray): Buffer to store termination flags (indicating the end of an episode).
+    ptr (int):                Pointer to the current position in the buffer.
+    size (int):               Current size of the buffer.
+    max_size (int):           Maximum capacity of the buffer.
     """
 
     def __init__(self, obs_dim, act_dim, size):

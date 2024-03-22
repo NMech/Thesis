@@ -7,9 +7,9 @@ import gym
 import time
 from spinup.utils.logx import EpochLogger
 
-import spinup.algos.pytorch.sac.core         as core
-import spinup.algos.pytorch.sac.replayBuffer as replayBuffer
-import spinup.algos.pytorch.sac.sacHelpers   as sacHelpers
+import spinup.algos.pytorch.explainableSac.core         as core
+import spinup.algos.pytorch.explainableSac.replayBuffer as replayBuffer
+import spinup.algos.pytorch.explainableSac.sacHelpers   as sacHelpers
 
 def sac(env_fn, actor_critic=core.MLPActorCritic, ac_kwargs=dict(), seed=0, 
         steps_per_epoch=4000, epochs=100, replay_size=int(1e6), gamma=0.99, 

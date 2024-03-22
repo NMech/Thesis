@@ -46,6 +46,7 @@ class SquashedGaussianMLPActor(nn.Module):
         self.mu_layer = nn.Linear(hidden_sizes[-1], act_dim)
         self.log_std_layer = nn.Linear(hidden_sizes[-1], act_dim)
         self.act_limit = act_limit
+        self.basic_data = [obs_dim, act_dim, hidden_sizes, activation]
 
     def forward(self, obs, deterministic=False, with_logprob=True):
         net_out = self.net(obs)

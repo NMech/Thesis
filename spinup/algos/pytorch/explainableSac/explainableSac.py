@@ -6,10 +6,11 @@ from torch.optim import Adam
 import gym
 import time
 from spinup.utils.logx import EpochLogger
+import spinup.algos.pytorch.explainableSac.explainableSacHelpers as eSH
 
-import spinup.algos.pytorch.sac.core         as core
-import spinup.algos.pytorch.sac.replayBuffer as replayBuffer
-import spinup.algos.pytorch.sac.sacHelpers   as sacHelpers
+import spinup.algos.pytorch.explainableSac.core         as core
+import spinup.algos.pytorch.explainableSac.replayBuffer as replayBuffer
+import spinup.algos.pytorch.explainableSac.sacHelpers   as sacHelpers
 
 def explainableSac(env_fn, actor_critic=core.MLPActorCritic, ac_kwargs=dict(), seed=0, 
         steps_per_epoch=4000, epochs=100, replay_size=int(1e6), gamma=0.99, 
@@ -194,6 +195,9 @@ def explainableSac(env_fn, actor_critic=core.MLPActorCritic, ac_kwargs=dict(), s
             for j in range(update_every):
                 batch = replay_buffer.sample_batch(batch_size)
                 sacHelpers.update(ac, ac_targ, alpha, gamma, pi_optimizer, q_optimizer, q_params, logger, polyak, data=batch)
+
+            #new_sac_policy, new_gbr_policy = execute_explainable_training()
+            eSH.execute_explainable_training(ac.pi, replay_buffer, alpha, logger)
 
         # End of epoch handling
         if (t+1) % steps_per_epoch == 0:
